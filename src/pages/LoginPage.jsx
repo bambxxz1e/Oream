@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export default function Login() {
@@ -7,6 +7,8 @@ export default function Login() {
   const [pw, setPw] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const validate = () => {
     // 아주 가벼운 유효성 검사
@@ -32,6 +34,7 @@ export default function Login() {
       // await api.login({ email, pw });
       alert(`로그인 시도\n이메일: ${email}`);
       // navigate("/home"); // 라우팅 사용 시
+      navigate("/goal1");
     } catch (err) {
       console.error(err);
       alert("로그인에 실패했습니다. 잠시 후 다시 시도해주세요.");
