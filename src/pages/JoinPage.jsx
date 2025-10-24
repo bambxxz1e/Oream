@@ -19,12 +19,12 @@ export default function Join() {
 		const pwOk = pw.length >= 8;
 		const repwOk = pw === repw;
 		if (!emailOk) {
-		alert("이메일 형식을 확인해주세요.");
-		return false;
+			alert("이메일 형식을 확인해주세요.");
+			return false;
 		}
 		if (!pwOk) {
-		alert("비밀번호는 8자 이상이어야 합니다.");
-		return false;
+			alert("비밀번호는 8자 이상이어야 합니다.");
+			return false;
 		}
 		if (!repwOk){
 			alert("비밀번호가 일치하지 않습니다.");
