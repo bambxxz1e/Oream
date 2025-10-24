@@ -4,7 +4,7 @@ import Todolist from "./component/Todolist";
 import Share from "./component/Share";
 import Navigatebar from "./component/Navigatebar";
 import "./Home.css";
-import progress from "./img/progress.png";
+import Progress from "./img/progress.png";
 export default function Home() {
   const navigate = useNavigate();
   const today = useMemo(() => {
