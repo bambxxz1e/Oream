@@ -1,0 +1,145 @@
+:root{
+    --bg-yellow: #ffef5e;     /* 배경 */
+    --panel: #ffffff;         /* 가운데 패널 */
+    --panel-shadow: rgba(0,0,0,0.08);
+    --ink: #1f2937;
+    --sky: #43b0ff;
+    --btn-next: #51b3ff;
+    --btn-next-shadow: rgba(67, 176, 255, 0.35);
+    --btn-disabled: #f1f5f9;
+    --radius-xl: 24px;
+  }
+  
+  *{ box-sizing: border-box; }
+  html, body, #root{ height: 100%; }
+  body{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; }
+  
+  .g1-wrap{
+    min-height: 100vh;
+    background: var(--bg-yellow);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 20px 16px 28px;
+  }
+  
+  /* 헤더 - 스텝 표시 */
+  .g1-header{
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  
+  .g1-step{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .g1-stepnum{
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    background: #fff;
+    color: var(--sky);
+    font-weight: 800;
+    box-shadow: 0 2px 4px rgba(0,0,0,.08);
+  }
+  
+  .g1-stepline{
+    flex: 0 0 80px;
+    height: 4px;
+    border-radius: 9999px;
+    background: #dff2ff;
+  }
+  
+  .g1-steptitle{
+    font-weight: 700;
+  }
+  
+  /* 가운데 패널 */
+  .g1-main{
+    display: grid;
+    place-items: center;
+    padding: 8px 0 10px;
+  }
+  
+  .g1-panel-shadow{
+    width: 100%;
+    max-width: 420px;
+    border-radius: var(--radius-xl);
+    background: rgba(255,255,255,0.55);
+    box-shadow: 0 14px 34px var(--panel-shadow);
+    padding: 16px;
+  }
+  
+  .g1-panel{
+    position: relative;
+    border-radius: var(--radius-xl);
+    background: var(--panel);
+    box-shadow: 0 10px 24px rgba(0,0,0,.06) inset;
+    padding: 18px 10px;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    align-items: center;
+  }
+  
+  /* 카드 영역 */
+  .g1-card-slot{
+    display: grid;
+    place-items: center;
+    padding: 4px;
+  }
+  
+  /* 좌우 화살표 */
+  .g1-arrow{
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    border: none;
+    background: #e9f6ff;
+    color: var(--sky);
+    font-size: 28px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(67,176,255,.2);
+    transition: transform .05s ease;
+  }
+  .g1-arrow:active{ transform: translateY(1px); }
+  .g1-left{ justify-self: start; }
+  .g1-right{ justify-self: end; }
+  
+  /* 푸터 버튼 */
+  .g1-footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  
+  .g1-btn{
+    height: 48px;
+    border-radius: 12px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .g1-btn-prev{
+    background: var(--btn-disabled);
+    color: #94a3b8;
+    cursor: not-allowed;
+  }
+  
+  .g1-btn-next{
+    background: var(--btn-next);
+    color: #fff;
+    box-shadow: 0 8px 18px var(--btn-next-shadow);
+  }
+  .g1-btn-next:active{ transform: translateY(1px); }
+  
+  /* 반응형 - 큰 화면에서 조금 키우기 */
+  @media (min-width: 480px){
+    .g1-panel-shadow{ max-width: 480px; }
+  }
+  

@@ -1,0 +1,23 @@
+/* 🔹 루트(전역) 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* 🔹 전체 배경 */
+  .intro-page {
+    background-color: #FFF265;
+    min-height: 100vh; /* 화면 전체 높이 */
+    display: flex; /* 중앙정렬용 */
+    align-items: center; /* 세로 가운데 */
+    justify-content: center; /* 가로 가운데 */
+  }
+  
+  /* 🔹 텍스트 스타일 (선택사항) */
+  .intro-page h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+  }
+  
