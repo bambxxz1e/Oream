@@ -13,14 +13,16 @@ export default function Login() {
   const validate = () => {
     // 아주 가벼운 유효성 검사
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const pwOk = pw.length >= 8;
+    const pwOk = pw.length >= 8 && 
+				/[A-Za-z]/.test(pw) &&
+				/[^A-Za-z0-9]/.test(pw);
     if (!emailOk) {
       alert("이메일 형식을 확인해주세요.");
       return false;
     }
     if (!pwOk) {
-      alert("비밀번호는 8자 이상이어야 합니다.");
-      return false;
+      alert("비밀번호가 올바르지 않습니다.");
+			return false;
     }
     return true;
   };
@@ -28,16 +30,28 @@ export default function Login() {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
+
     try {
       setLoading(true);
-      // TODO: 실제 로그인 연동 (예: Supabase/백엔드)
-      // await api.login({ email, pw });
-      alert(`로그인 시도\n이메일: ${email}`);
-      // navigate("/home"); // 라우팅 사용 시
+      const res = await fetch("http://localhost:5001/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password: pw }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message);
+        return;
+      }
+
+      alert("로그인 성공!");
+
       navigate("/goal1");
     } catch (err) {
       console.error(err);
-      alert("로그인에 실패했습니다. 잠시 후 다시 시도해주세요.");
+      alert("로그인 중 오류가 발생했습니다.");
     } finally {
       setLoading(false);
     }

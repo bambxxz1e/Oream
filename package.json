@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "maplibre-gl": "^5.9.0",
     "mongodb": "^6.20.0",
     "mongoose": "^8.19.2",
+    "mysql2": "^3.15.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-map-gl": "^8.1.0",
