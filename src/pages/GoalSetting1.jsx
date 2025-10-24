@@ -1,8 +1,11 @@
 import { useMemo, useState, useCallback, useEffect } from "react";
-import "./Goal1.css";                 // 스타일 파일 경로 맞게
+import "./Goal1.css";
 import FairyCard from "./component/FairyCard";
+import EditableTitle from "./component/EditableTitle";
+import ProgressBar from "./component/ProgressBar";
+import NavigationButtons from "./component/NavigationButtons";
 
-// 이미지 경로는 프로젝트 구조에 맞게 수정
+// 이미지 경로는 프로젝트 구조에 맞게 수정하세요
 import Sora from "./img/Sora.png";
 import SoraAvatar from "./img/SoraAvatar.png";
 import Romy from "./img/Romy.png";
@@ -10,11 +13,32 @@ import RomiAvatar from "./img/RomiAvatar.png";
 import Chodam from "./img/Chodam.png";
 import ChodamAvatar from "./img/ChodamAvatar.png";
 
+/**
+ * Goal1
+ * - props.onNext(selectedFairy) : 다음 버튼 클릭 시 선택된 요정 객체를 넘겨줌 (옵션)
+ * - props.onPrev()              : 이전 클릭 (옵션)
+ * - 라우터를 쓰고 싶으면 onNext 대신 useNavigate로 이동하도록 바꿔도 됩니다.
+ */
+
 export default function Goal1({ onNext, onPrev }) {
+  // ===== 단계 진행 상태 =====
+  const [currentStep, setCurrentStep] = useState(1);
+  const [title, setTitle] = useState("단계별 진행");
+  const totalSteps = 3;
+
+  const handleStepPrev = useCallback(() => {
+    setCurrentStep((s) => (s > 1 ? s - 1 : s));
+  }, []);
+
+  const handleStepNext = useCallback(() => {
+    setCurrentStep((s) => (s < totalSteps ? s + 1 : s));
+  }, []);
+
+  // ===== 카드 데이터 =====
   const fairies = useMemo(
     () => [
       {
-        id: "sora",
+        key: "sora",
         title: "큰 용기를 주는 등산 요정",
         name: "소라",
         desc: ["활기차고 명랑한 등산 요정!", "당신의 목표 해결법을 알려줘요!"],
@@ -28,13 +52,13 @@ export default function Goal1({ onNext, onPrev }) {
         cardGradient: "linear-gradient(180deg, #ffffff 0%, #eaf7ff 100%)",
       },
       {
-        id: "romi",
+        key: "romi",
         title: "무한한 응원을 주는 등산 요정",
         name: "로미",
         desc: ["사랑스러운 등산 요정!", "당신과 함께 목표를 끈기있게 해내가요."],
         tags: ["사랑스러운", "공감적인", "친절한", "너그러운"],
-        imgSrc: Romy,            // ✅ 대소문자 동일
-        badgeSrc: RomiAvatar,    // ✅ 대소문자 동일
+        imgSrc: Romy,
+        badgeSrc: RomiAvatar,
         titleColor: "#ff7693",
         tagColor: "#77bfff",
         pinColor: "#ff8ca9",
@@ -42,10 +66,10 @@ export default function Goal1({ onNext, onPrev }) {
         cardGradient: "linear-gradient(180deg, #ffffff 0%, #ffeef3 100%)",
       },
       {
-        id: "chodam",
+        key: "chodam",
         title: "따뜻한 희망을 주는 등산 요정",
         name: "초담",
-        desc: ["신중하고 소중은 등산 요정!", "당신의 신중한 결정을 도와줘요!"],
+        desc: ["신중하고 소중한 등산 요정!", "당신의 신중한 결정을 도와줘요!"],
         tags: ["꼼꼼한", "신중한", "깊은", "따뜻한"],
         imgSrc: Chodam,
         badgeSrc: ChodamAvatar,
@@ -59,10 +83,12 @@ export default function Goal1({ onNext, onPrev }) {
     []
   );
 
-  const [idx, setIdx] = useState(1); // 로미부터
+  // 가운데 로미부터 시작 (index 1)
+  const [idx, setIdx] = useState(1);
   const total = fairies.length;
   const current = fairies[idx];
 
+  // 카드 좌우 이동
   const prevCard = useCallback(() => {
     setIdx((n) => (n - 1 + total) % total);
   }, [total]);
@@ -71,6 +97,7 @@ export default function Goal1({ onNext, onPrev }) {
     setIdx((n) => (n + 1) % total);
   }, [total]);
 
+  // 키보드 좌우 화살표 이동
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "ArrowLeft") prevCard();
@@ -80,48 +107,68 @@ export default function Goal1({ onNext, onPrev }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [prevCard, nextCard]);
 
-  const handleNext = () => {
+  // 외부로 선택된 캐릭터 전달
+  const handleConfirmNext = useCallback(() => {
     if (onNext) onNext(current);
-    // 라우팅 쓸 땐 여기서 navigate("/goal/2")
-  };
+    else console.log("NEXT with:", current);
+  }, [onNext, current]);
+
+  const handleConfirmPrev = useCallback(() => {
+    if (onPrev) onPrev();
+  }, [onPrev]);
 
   return (
     <div className="g1-wrap">
-      <header className="g1-header">
-        <div className="g1-step">
-          <span className="g1-stepnum">1</span>
-          <span className="g1-stepline" />
-          <span className="g1-steptitle">등반을 함께할 캐릭터를 선택해주세요!</span>
-        </div>
-      </header>
+      {/* 상단 단계/제목/네비 */}
+      <div className="w-full max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-lg">
+        <EditableTitle currentStep={currentStep} title={title} onTitleChange={setTitle} />
 
+        <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+
+        <NavigationButtons
+          currentStep={currentStep}
+          totalSteps={totalSteps}
+          onPrevious={handleStepPrev}
+          onNext={handleStepNext}
+        />
+      </div>
+
+      {/* 메인 캐릭터 카드 영역 */}
       <main className="g1-main">
-        <div className="g1-panel-shadow">
-          <div className="g1-panel">
-            <button className="g1-arrow g1-left" onClick={prevCard} aria-label="이전">
-              ‹
-            </button>
+        <div className="g1-panel">
+          <button
+            type="button"
+            className="g1-arrow g1-left"
+            onClick={prevCard}
+            aria-label="이전 캐릭터"
+          >
+            ‹
+          </button>
 
-            <div className="g1-card-slot">
-              {/* ✅ key는 JSX에 직접 전달, 객체 spread엔 넣지 않음 */}
-              <FairyCard key={current.id} {...current} />
-            </div>
-
-            <button className="g1-arrow g1-right" onClick={nextCard} aria-label="다음">
-              ›
-            </button>
+          <div className="g1-card-slot">
+            <FairyCard {...current} />
           </div>
+
+          <button
+            type="button"
+            className="g1-arrow g1-right"
+            onClick={nextCard}
+            aria-label="다음 캐릭터"
+          >
+            ›
+          </button>
+        </div>
+
+        {/* 선택 확정/이전(옵션) */}
+        <div className="g1-actions">
+          <button type="button" className="g1-btn g1-btn-secondary" onClick={handleConfirmPrev}>
+            이전
+          </button>
+          <button type="button" className="g1-btn g1-btn-primary" onClick={handleConfirmNext}>
+            이 요정으로 진행
+          </button>
         </div>
       </main>
-
-      <footer className="g1-footer">
-        <button className="g1-btn g1-btn-prev" disabled onClick={() => onPrev?.()}>
-          이전
-        </button>
-        <button className="g1-btn g1-btn-next" onClick={handleNext}>
-          다음
-        </button>
-      </footer>
     </div>
   );
 }

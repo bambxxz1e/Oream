@@ -140,3 +140,9 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px #fff inset;
   -webkit-text-fill-color: #111;
 }
+
+.link{
+  float: right;
+  color: #919191;
+  margin-right: 23px;
+}

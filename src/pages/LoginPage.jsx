@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 export default function Login() {
@@ -77,7 +78,9 @@ export default function Login() {
 
           <div className="new">
             <label className="label-new">새로 가입하신다면?</label>
-            {/* '회원가입'으로 넘어가는거 만들기 (JoinPage와 연결) */}
+            <Link to="/join" className="link">
+              회원가입
+              </Link>
           </div>
 
           <button className="btn-login" type="submit" disabled={loading}>
