@@ -4,8 +4,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mysql from "mysql2/promise";
 import bcrypt from "bcryptjs";
+import path from "path";
 
-dotenv.config();
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 const app = express();
 
@@ -17,10 +18,10 @@ app.use(express.json());
 
 // MySQL 연결
 const pool = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "0121",
-  database: "mithon2025",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
