@@ -1,47 +1,31 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import "./Todolist.css";
 
-const LS_KEY = "todolist_items_v1";
-
-export default function Todolist() {
-  const [items, setItems] = useState(() => {
-    try {
-      const raw = localStorage.getItem(LS_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch {
-      return [];
-    }
-  });
+export default function Todolist({ items, onItemsChange }) {
   const [showInput, setShowInput] = useState(false);
   const [text, setText] = useState("");
-
-  // 저장
-  useEffect(() => {
-    try {
-      localStorage.setItem(LS_KEY, JSON.stringify(items));
-    } catch {}
-  }, [items]);
-
 
   const addItem = () => {
     const t = text.trim();
     if (!t) return;
-    setItems((prev) => [
-      ...prev,
+    const newItems = [
+      ...items,
       { id: crypto.randomUUID ? crypto.randomUUID() : Date.now() + "_" + Math.random(), text: t },
-    ]);
+    ];
+    onItemsChange(newItems);
     setText("");
     setShowInput(false);
   };
 
   const removeItem = (id) => {
-    setItems((prev) => prev.filter((it) => it.id !== id));
+    const newItems = items.filter((it) => it.id !== id);
+    onItemsChange(newItems);
   };
 
   return (
-    <section className="todo-card" aria-label="등반 중 할일 정하기">
+    <section className="todo-card" aria-label="등반 중 할 일 정하기">
       <header className="todo-head">
-        <h2 className="todo-title">등반 중 할일 정하기</h2>
+        <h2 className="todo-title">등반 중 할 일 정하기</h2>
         <button
           className="btn-add"
           aria-label={showInput ? "할 일 입력 닫기" : "할 일 추가"}
