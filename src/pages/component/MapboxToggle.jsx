@@ -114,6 +114,10 @@ export default function MapboxToggle() {
 
   const handleConfirm = () => {
     console.log("등반 시작:", selectedLocation);
+    // 선택한 지역을 localStorage에 저장
+    if (selectedLocation) {
+      localStorage.setItem("selectedLocationName", selectedLocation.name);
+    }
     setShowPopup(false);
   };
 

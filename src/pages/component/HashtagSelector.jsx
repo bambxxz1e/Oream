@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./HashtagSelector.css";
 
-export default function HashtagSelector() {
+export default function HashtagSelector({ selectedTags, onTagsChange }) {
   const tags = [
     "공부",
     "자기계발",
@@ -14,12 +14,11 @@ export default function HashtagSelector() {
     "성장",
   ];
 
-  const [selectedTags, setSelectedTags] = useState([]);
-
   const toggleTag = (tag) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
+    const newTags = selectedTags.includes(tag)
+      ? selectedTags.filter((t) => t !== tag)
+      : [...selectedTags, tag];
+    onTagsChange(newTags);
   };
 
   return (
