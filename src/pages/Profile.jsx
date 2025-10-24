@@ -1,19 +1,25 @@
 import profileImg from "./img/profile.png";
-import fairyLevelImg from "./img/fairyLevel.png"
+import fairyLevelImg from "./img/fairyLevel.png";
+import chodamProfile from "./img/ChodamProfile.png";
+import Fuji from './img/fuji.png';
+import Denali from './img/denali.png';
+import Hallasan from './img/hallasan.png';
+import Bukak from './img/bukak.png';
+import Yarigadake from './img/yarigadake.png';
 import Navigatebar from "./component/Navigatebar";
 import "./Profile.css";
 
 export default function Profile() {
   const climbRecords = [
-    { image: '/fuji.jpg', name: '후지산, 일본', date: '2025.09.09' },
-    { image: '/denali.jpg', name: '데날리산, 미국', date: '2025.06.23' },
-    { image: '/hallasan.jpg', name: '한라산, 대한민국', date: '2025.03.15' }
+    { image: Fuji, name: '후지산, 일본', date: '2025.09.09' },
+    { image: Denali, name: '데날리산, 미국', date: '2025.06.23' },
+    { image: Hallasan, name: '한라산, 대한민국', date: '2025.03.15' }
   ];
 
   const replayRecords = [
-    { image: '/fuji.jpg', tag: '취미', name: '후지산, 일본', date: '2025.09.09' },
-    { image: '/bukak.jpg', tag: '자기관리', name: '북악산, 대한민국', date: '2025.03.21' },
-    { image: '/yarigadake.jpg', tag: '도전정신', name: '야릉가다케, 아르..', date: '2025.01.21' }
+    { image: Fuji, tag: '취미', name: '후지산, 일본', date: '2025.09.09' },
+    { image: Bukak, tag: '자기관리', name: '북악산, 대한민국', date: '2025.03.21' },
+    { image: Yarigadake, tag: '도전정신', name: '야리가타케, 아르..', date: '2025.01.21' }
   ];
 
   return (
@@ -31,7 +37,9 @@ export default function Profile() {
               <h3 className="session-title">나를 위한 오늘의 요정 한마디</h3>
               <div className="msg-card">
                 <div className="fairy-profile">
-                  <div className="fairy-icon"></div>
+                  <div className="fairy-icon">
+                    <img src={chodamProfile} alt="초담 프로필" />
+                  </div>
                   <div className="fairy-name">초담</div>
                 </div>
 
