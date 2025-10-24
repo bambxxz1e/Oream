@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import Logo from "./img/login_join_logo.png";
 
 export default function Join() {
 	const [name, setName] = useState("");
@@ -74,7 +75,7 @@ export default function Join() {
 	return (
 		<div className="login-wrap">
 			<div className="login-card">
-				<h1 className="service-name">서비스명</h1>
+				<img src={Logo}  className="service-logo" />
 
 				<form className="form" onSubmit={onSubmit} noValidate>
 					<label className="label">사용자 이름</label>

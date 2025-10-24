@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import Logo from "./img/login_join_logo.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -60,7 +61,7 @@ export default function Login() {
   return (
     <div className="login-wrap">
       <div className="login-card">
-        <h1 className="service-name">서비스명</h1>
+        <img src={Logo} className="service-name"/>
 
         <form className="form" onSubmit={onSubmit} noValidate>
           <label className="label">이메일을 적어주세요</label>

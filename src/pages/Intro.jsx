@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Intro.css";
+import IntroImage from "./img/intrologo.png";
 
 export default function Intro() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Intro() {
 
   return (
     <div className="intro-page">
-      <h1>Intro 페이지 입니다</h1>
+      <img src={IntroImage} alt="" />
     </div>
   );
 }

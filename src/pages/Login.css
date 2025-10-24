@@ -147,3 +147,10 @@ input:-webkit-autofill {
   color: #919191;
   margin-right: 23px;
 }
+
+.service-logo {
+  display: block;        /* 이미지 한 줄 전체 차지 */
+  margin: 0 auto 40px;   /* 가운데 정렬 + 아래 여백 */
+  max-width: 200px;      /* 필요시 로고 최대 너비 */
+  height: auto;
+}

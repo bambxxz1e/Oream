@@ -33,9 +33,12 @@ body {
 
 /* 페이지 래퍼 (모바일 폭 기준) */
 .hlog-page {
-  max-width: 420px;
-  margin: 0 auto;
-  padding: 16px;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* 헤더 */
@@ -44,6 +47,7 @@ body {
   align-items: center;
   gap: 8px;
   margin-bottom: 10px;
+  
 }
 .hlog-backbtn {
   border: none;
@@ -53,12 +57,16 @@ body {
   line-height: 0;
   cursor: pointer;
   border-radius: 8px;
+  margin-left: 10px;
+
 }
 .hlog-backbtn:active {
   background: #f1f5f9;
 }
 .hlog-title {
-  margin: 0;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  margin-left: 10px;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.2px;
@@ -66,10 +74,11 @@ body {
 
 /* 메인 카드 */
 .hlog-card {
-  background: var(--panel-grad);
-  border-radius: 24px;
-  padding: 18px 16px 20px;
-  box-shadow: var(--shadow);
+    background: var(--panel-grad);
+    border-radius: 24px;
+    padding: 24px 16px 60px; /* ✅ 안쪽 여백 조정 (아래로 여유 있게) */
+    box-shadow: none; /* ✅ 그림자 제거 (원하면 유지 가능) */
+    min-height: 100vh; /* ✅ 카드가 화면 아래 끝까지 채워지도록 */
 }
 
 /* 상단 질문 */
