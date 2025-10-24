@@ -36,8 +36,8 @@ export default function Home() {
         </section>
       </header>
 
-      {/* 오늘의 등반부터 배경/라운드 시작 */}
-      <div className="bg-yellow">
+      {/* 오늘의 등반부터 노란 배경 시작 */}
+      <div className="yellow-panel">
         <main className="home-main">
           <div className="section-title">
             <h2>오늘의 등반</h2>
@@ -86,14 +86,16 @@ export default function Home() {
           {/* 공유 섹션 */}
           <section className="share-sec">
             <h3>친구들과 등반기록을 공유해보세요</h3>
-            {/* 필요 시 Share 컴포넌트로 교체 */}
-            {/* <Share /> */}
+            {/* <Share /> 로 교체 가능 */}
             <img src={Friends_location} alt="친구 위치 공유 예시" />
           </section>
         </main>
+
+        {/* ✅ 네비가 가리는 걸 방지하는 스페이서(네비 높이만큼) */}
+        <div className="nav-spacer" aria-hidden="true" />
       </div>
 
-      {/* 하단 고정 내비게이션: bg-yellow 밖으로 이동 */}
+      {/* 하단 고정 내비게이션: 노란 패널 바깥 */}
       <Navigatebar />
     </div>
   );

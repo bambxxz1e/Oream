@@ -10,7 +10,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 0;
     width: 100%;
-    background: var(--panel);
+    background: #ffffff;
     border-radius: 100px 100px 0 0; /* 위쪽만 둥글게 */
     padding: 18px 12px;
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);

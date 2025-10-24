@@ -6,6 +6,10 @@
   --accent: #4fbbff; /* 파랑 */
   --accent-soft: #e8f6ff;
   --radius: 18px;
+
+  
+  /* 네비 높이(스페이서 계산에 사용) */
+  --nav-height: 88px;
 }
 
 * {
@@ -19,7 +23,14 @@ body {
   margin-top: 30px;
   min-height: 100vh;
   background: #ffffff;
-  padding-bottom: 88px; /* 하단 네비 공간 */
+  padding-bottom: var(--nav-height);
+}
+/* ✅ 노란 패널은 헤더 아래부터 시작, 상단만 둥글게 */
+.yellow-panel {
+  background-color: #ffee66;
+  border-radius: 20px 20px 0 0; /* 상단만 둥글게 */
+  margin-top: 40px;
+  overflow: hidden; /* 둥근 모서리 누수 방지 */
 }
 
 .home-header {
@@ -64,7 +75,10 @@ body {
 .home-main {
   padding: 16px 14px 120px;
 }
-
+/* 네비가 가리는 것을 방지하는 하단 스페이서 */
+.nav-spacer {
+  height: var(--nav-height);
+}
 .section-title {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -200,7 +214,7 @@ body {
 }
 
 .bg-yellow {
-  background-color: var(--bg);
-  border-radius: 20px;
-  margin-top: 40px;
+  background-color: var(--bg) !important;
+  border-radius: 20px !important;
+  margin-top: 40px !important;
 }
