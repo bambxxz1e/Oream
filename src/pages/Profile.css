@@ -1,0 +1,268 @@
+:root {
+  --bg: #ffee66;
+  --card: #ffffff;
+  --ink: #263238;
+  --muted: #7b8b8b;
+  --accent: #4fbbff;
+  --accent-soft: #e8f6ff;
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+}
+
+/* 전체 컨테이너 */
+.profile-wrap {
+  margin-top: 30px;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* 헤더 영역 */
+.profile-header {
+  padding: 20px 20px 5px;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.profile-title {
+  margin: 0 0 15px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.point-title {
+  color: var(--accent);
+}
+
+/* 메인 컨텐츠 영역 */
+.bg-blue {
+  background-color: var(--accent);
+  border-radius: 20px 20px 0 0;
+  margin: 40px 0 0 0;
+  padding: 30px 14px 80px;
+  min-height: calc(100vh - 200px);
+}
+
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 섹션 타이틀 */
+.session-title {
+  margin: 0 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.showall {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+/* 요정 메시지 섹션 */
+.fairy-msg {
+  margin-bottom: 8px;
+}
+
+.msg-card {
+  background: var(--card);
+  border-radius: 40px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.fairy-profile {
+  text-align: center;
+}
+
+.fairy-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #b8e6b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2d5a2d;
+  flex-shrink: 0;
+}
+
+.fairy-name {
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.msg-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4a90e2;
+  font-weight: 500;
+  padding-top: 4px;
+}
+
+/* 3개 그리드 */
+.grid-three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* 등반기록 카드 */
+.climb-card {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.climb-card-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.climb-card-info {
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.climb-card-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.climb-card-date {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.climb-log,
+.replay {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+}
+
+.climb-log .session-title,
+.replay .session-title {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+/* 리플레이 카드 */
+.replay-card {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.replay-card-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.replay-card-info {
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.replay-card-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px solid #4fbbff;
+  border-radius: 20px;
+  font-size: 10px;
+  color: #4fbbff;
+  margin-bottom: 6px;
+  background: var(--card);
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.replay-card-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.replay-card-date {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0 0 auto 0;
+}
+
+.replay-card-btn {
+  width: 100%;
+  padding: 8px;
+  background: var(--accent);
+  color: #ffffff;
+  border: 0;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s;
+  margin-top: 8px;
+}
+
+.replay-card-btn:hover {
+  transform: translateY(-1px);
+}
+
+.replay-card-btn:active {
+  transform: translateY(0);
+}
+
+.img-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.img-box img {
+  max-width: 100%;
+  height: auto;
+}
