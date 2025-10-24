@@ -19,7 +19,6 @@ import ChodamAvatar from "./img/ChodamAvatar.png";
  * - props.onPrev()              : 이전 클릭 (옵션)
  * - 라우터를 쓰고 싶으면 onNext 대신 useNavigate로 이동하도록 바꿔도 됩니다.
  */
-
 export default function Goal1({ onNext, onPrev }) {
   // ===== 단계 진행 상태 =====
   const [currentStep, setCurrentStep] = useState(1);
@@ -107,6 +106,17 @@ export default function Goal1({ onNext, onPrev }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [prevCard, nextCard]);
 
+  // 현재/좌/우 포지션 계산
+  const getPos = useCallback(
+    (i) => {
+      if (i === idx) return "center";
+      if (i === (idx - 1 + total) % total) return "left";
+      if (i === (idx + 1) % total) return "right";
+      return "hidden";
+    },
+    [idx, total]
+  );
+
   // 외부로 선택된 캐릭터 전달
   const handleConfirmNext = useCallback(() => {
     if (onNext) onNext(current);
@@ -122,9 +132,7 @@ export default function Goal1({ onNext, onPrev }) {
       {/* 상단 단계/제목/네비 */}
       <div className="w-full max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-lg">
         <EditableTitle currentStep={currentStep} title={title} onTitleChange={setTitle} />
-
         <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-
         <NavigationButtons
           currentStep={currentStep}
           totalSteps={totalSteps}
@@ -145,8 +153,15 @@ export default function Goal1({ onNext, onPrev }) {
             ‹
           </button>
 
-          <div className="g1-card-slot">
-            <FairyCard {...current} />
+          <div className="g1-card-stage">
+            {fairies.map((f, i) => {
+              const pos = getPos(i);
+              return (
+                <div key={f.key} className={`g1-card-wrap is-${pos}`}>
+                  <FairyCard {...f} />
+                </div>
+              );
+            })}
           </div>
 
           <button
