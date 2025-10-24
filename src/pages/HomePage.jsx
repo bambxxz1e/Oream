@@ -9,6 +9,8 @@ import Card1 from "./img/card1.png";
 import Card2 from "./img/card2.png";
 import Card3 from "./img/card3.png";
 import Card4 from "./img/card4.png";
+import Logo from "./img/main_logo.png";
+import Friends_location from "./img/friend_location.png";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -24,40 +26,38 @@ export default function Home() {
     <div className="home-wrap">
       {/* 헤더 & ToDo */}
       <header className="home-header">
-        <h1 className="service-title">오름</h1>
+        <img src={Logo} alt="서비스 로고" className="logoimg" />
         <section className="card block">
           <div className="card-head">
             <span className="card-title">등반 중 할일 정하기</span>
-            <button className="icon-btn" aria-label="추가">
-              ＋
-            </button>
+            <button className="icon-btn" type="button" aria-label="할 일 추가">＋</button>
           </div>
           <Todolist />
         </section>
       </header>
+
+      {/* 오늘의 등반부터 배경/라운드 시작 */}
       <div className="bg-yellow">
-        {/* 오늘의 등반 (이미지로 대체 예정 영역) */}
         <main className="home-main">
           <div className="section-title">
             <h2>오늘의 등반</h2>
-            <button className="play-btn" aria-label="재생">
-              ▶
-            </button>
+            <button className="play-btn" type="button" aria-label="재생">▶</button>
           </div>
 
-          {/* 여기 두 박스는 현재 임시 이미지/플레이스홀더 */}
+          {/* 진행 이미지 카드 */}
           <section className="image-card">
             <div className="image-placeholder">
-              <img src={Progress} />
+              <img src={Progress} alt="진행 현황" />
             </div>
           </section>
 
-          {/* 등반일지 작성 버튼 */}
+          {/* 등반일지 작성 */}
           <section className="write-log">
             <h3>오늘의 등반일지를 작성해보세요</h3>
             <div className="grid-two">
               <button
                 className="primary-cta"
+                type="button"
                 onClick={() => navigate("/hikinglog")}
               >
                 <p className="plus">+</p>
@@ -65,13 +65,19 @@ export default function Home() {
                 등반일지 작성하기
               </button>
 
-              {/* 우측은 나중에 카드 이미지로 대체해도 됨 */}
-              <div className="mini-cards">
-                <div className="mini-img">
-                  <img src={Card1} className="card1"/>
+              {/* 우측: 가로 슬라이더 */}
+              <div className="mini-cards" role="list">
+                <div className="mini-img" role="listitem">
+                  <img src={Card1} alt="등반 카드 1" />
                 </div>
-                <div className="mini-img">
-                  <img src={Card3} />
+                <div className="mini-img" role="listitem">
+                  <img src={Card3} alt="등반 카드 2" />
+                </div>
+                <div className="mini-img" role="listitem">
+                  <img src={Card2} alt="등반 카드 3" />
+                </div>
+                <div className="mini-img" role="listitem">
+                  <img src={Card4} alt="등반 카드 4" />
                 </div>
               </div>
             </div>
@@ -80,13 +86,15 @@ export default function Home() {
           {/* 공유 섹션 */}
           <section className="share-sec">
             <h3>친구들과 등반기록을 공유해보세요</h3>
-            <Share />
+            {/* 필요 시 Share 컴포넌트로 교체 */}
+            {/* <Share /> */}
+            <img src={Friends_location} alt="친구 위치 공유 예시" />
           </section>
         </main>
-
-        {/* 하단 고정 내비게이션 */}
-        <Navigatebar />
       </div>
+
+      {/* 하단 고정 내비게이션: bg-yellow 밖으로 이동 */}
+      <Navigatebar />
     </div>
   );
 }

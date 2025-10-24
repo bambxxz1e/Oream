@@ -11,12 +11,12 @@
     gap: 0;
     width: 100%;
     background: var(--panel);
-    border-radius: 28px 28px 0 0; /* ← 위쪽만 둥글게! */
+    border-radius: 100px 100px 0 0; /* 위쪽만 둥글게 */
     padding: 18px 12px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    overflow: hidden; /* 추가: border-radius가 제대로 작동하도록 */
   }
-  
   
   /* 각 아이템 버튼 */
   .dest-item{
@@ -66,4 +66,14 @@
     .dest-item{ padding:18px 8px; border-radius:18px; }
     .dest-label{ font-size:1rem; }
   }
-  
+  .navigatebar {
+    position: fixed; /* 화면에 고정 */
+    bottom: 0; /* 화면 하단에 위치 */
+    left: 0; /* 왼쪽 끝에 정렬 */
+    width: 100%; /* 화면 너비를 채움 */
+    background-color: #fff; /* 배경색 */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 상단 그림자 효과 */
+    z-index: 1000; /* 다른 요소 위에 표시 */
+    border-radius: 16px 16px 0 0; /* 위쪽 모서리를 둥글게 */
+    overflow: hidden; /* border-radius가 제대로 적용되도록 */
+  }

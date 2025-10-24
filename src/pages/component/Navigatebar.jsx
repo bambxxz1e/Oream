@@ -51,24 +51,28 @@ export default function Navigatebar({ initial = "home" }) {
   };
 
   return (
-    <div className="dest-wrap" role="group" aria-label="메뉴 선택">
-      <button
-        type="button"
-        className={`dest-item left ${active === "home" ? "selected" : ""}`}
-        onClick={goHome}
-      >
-        <MountainIcon />
-        <span className="dest-label">오늘의 등반</span>
-      </button>
+    <div className="navigatebar">
+      <div className="dest-wrap" role="group" aria-label="메뉴 선택">
+        <button
+          type="button"
+          className={`dest-item left ${active === "home" ? "selected" : ""}`}
+          onClick={goHome}
+        >
+          <MountainIcon />
+          <span className="dest-label">오늘의 등반</span>
+        </button>
 
-      <button
-        type="button"
-        className={`dest-item right ${active === "profile" ? "selected" : ""}`}
-        onClick={goProfile}
-      >
-        <UserIcon />
-        <span className="dest-label">내 공간</span>
-      </button>
+        <button
+          type="button"
+          className={`dest-item right ${
+            active === "profile" ? "selected" : ""
+          }`}
+          onClick={goProfile}
+        >
+          <UserIcon />
+          <span className="dest-label">내 공간</span>
+        </button>
+      </div>
     </div>
   );
 }
