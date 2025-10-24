@@ -1,0 +1,41 @@
+.title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff265; /* 노란색 배경 */
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  
+  /* 왼쪽 동그라미 숫자 */
+  .title-step {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #4fbbff; /* 파란색 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: white;
+    flex-shrink: 0;
+  }
+  
+  /* 오른쪽 텍스트 입력 (제목 부분) */
+  .title-input {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #4fbbff;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+  
+  .title-input::placeholder {
+    color: #8cd3ff;
+  }
+  
