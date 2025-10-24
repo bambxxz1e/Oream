@@ -1,18 +1,15 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/LoginPage";
+import Intro from "./pages/Intro";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <h1>김이레 커밋테스트 입니다 </h1>  
-      </div> 
-      <div>
-        <h1>이거는 윤성연 커밋테스트 제발슨!!</h1>
-      </div>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Intro />} />
+        <Route path="/login" element={<Login />} />
+      
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App
