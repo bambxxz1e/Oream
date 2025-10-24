@@ -6,6 +6,8 @@ import Join from "./pages/JoinPage";
 import Home from "./pages/HomePage";
 import Profile from "./pages/Profile";
 import Hiking_log from "./pages/Hiking_log";
+import Map from "./pages/Map";
+import Target from "./pages/Target";
 
 export default function App() {
   return (
@@ -15,7 +17,9 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
         <Route path="/goal1" element={<Goal1 />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/map" element={<Map />} />
+        <Route path="/target" element={<Target />} />
+        <Route path="/Homepage" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/hikinglog" element={<Hiking_log />} />
       </Routes>
