@@ -6,6 +6,10 @@
   --accent: #4fbbff; /* 파랑 */
   --accent-soft: #e8f6ff;
   --radius: 18px;
+
+  
+  /* 네비 높이(스페이서 계산에 사용) */
+  --nav-height: 88px;
 }
 
 * {
@@ -19,18 +23,22 @@ body {
   margin-top: 30px;
   min-height: 100vh;
   background: #ffffff;
-  padding-bottom: 88px; /* 하단 네비 공간 */
+  padding-bottom: var(--nav-height);
+}
+/* ✅ 노란 패널은 헤더 아래부터 시작, 상단만 둥글게 */
+.yellow-panel {
+  background-color: #ffee66;
+  border-radius: 20px 20px 0 0; /* 상단만 둥글게 */
+  margin-top: 40px;
+  overflow: hidden; /* 둥근 모서리 누수 방지 */
 }
 
 .home-header {
   padding: 14px 14px 0;
 }
 
-.service-title {
-  padding-right: 15px;
-  margin: 0 0 15px;
-  font-size: 22px;
-  color: var(--ink);
+.logoimg {
+  padding-left: 10px;
 }
 
 .card {
@@ -67,13 +75,16 @@ body {
 .home-main {
   padding: 16px 14px 120px;
 }
-
+/* 네비가 가리는 것을 방지하는 하단 스페이서 */
+.nav-spacer {
+  height: var(--nav-height);
+}
 .section-title {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: end;
   gap: 10px;
-  margin: 10px  12px;
+  margin: 10px 12px;
   color: var(--ink);
 }
 .section-title h2 {
@@ -86,9 +97,9 @@ body {
   color: #3a5060;
   font-weight: 700;
 }
-.plus{
-    font-size: 48px;
-    color: #4fbbff;
+.plus {
+  font-size: 48px;
+  color: #4fbbff;
 }
 
 .play-btn {
@@ -113,67 +124,97 @@ body {
   font-weight: 700;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
-
+/* 제목 */
 .write-log h3,
 .share-sec h3 {
-  margin: 0 0 10px;
-  font-size: 14px;
-  color: #333;
-}
-
-.grid-two {
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 12px;
-}
-
-.primary-cta {
-  height: 160px;
-  border: 0;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  top: 10px;
+  margin: 0 0 14px;
+  font-size: 20px;
   font-weight: 700;
-  cursor: pointer;
+  color: #222;
+  padding: 10px;
+}
+
+/* 좌측 고정 컬럼 + 우측 슬라이더 */
+.grid-two{
+    display: grid;
+    grid-template-columns: 180px 1fr;  /* ⬅️ 왼쪽 컬럼을 180px로 줄임 */
+    gap: 8px;                           /* ⬅️ 사이 간격 축소 */
+    align-items: start;
+  }
+
+/* 왼쪽: 등반일지 작성하기 카드 (세로로 길게) */
+.primary-cta{
+    width: 100%;        /* ⬅️ 컬럼 너비(180px)에 맞춤 */
+    height: 260px;
+    margin-right: 0;    /* ⬅️ 제거 (간격 좁히기) */
+    border: 0;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,.10);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:#2d4e7f;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+.primary-cta .plus {
+  margin: 0 0 8px;
+  line-height: 1;
+  font-size: 64px; /* 큼직한 + */
 }
 .primary-cta:hover {
   transform: translateY(-1px);
 }
 
-.mini-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0px;
-  margin-top: 10px;
-}
+/* 오른쪽: 2행 그리드가 가로로 슬라이드되도록 */
+.mini-cards{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 230px;           /* ⬅️ 카드 폭 살짝 확대(220→230) */
+    grid-template-rows: repeat(2, 140px);                        /* 카드 간격은 적당히 */
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 48px;                /* ⬅️ 마지막 카드 안 잘리도록 스크롤 여유 */
+    position: relative;
+  }
+/* 카드 모양 & 이미지 채우기 */
 .mini-img {
-  width: 30%;
-  height: 120px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: #2d4e7f;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  scroll-snap-align: start;
 }
-.card1{
-    padding-left: 60px;
+.mini-img img {
+  padding: 5px;
+  width: 50%; /* 카드 너비 꽉 채우기 */
+  height: 80%; /* 카드 높이도 채움 */
+  object-fit: cover; /* 비율 유지하며 꽉 채우기 (가장 자연스러움) */
+  display: block;
+  border-radius: inherit; /* 라운드 모양 유지 */
 }
-.mini-img img{
-    display:block;
-    width:180px;
-    height:auto;
-    object-fit:cover;                   /* 잘림 없이 꽉 차게 */
-    border-radius:inherit;
+
+.mini-cards::after{
+    content:"";
+    width: 160px;                       /* ⬅️ 원하는 만큼 늘리기 (120~300px 추천) */
+    grid-row: 1 / span 2;               /* 두 줄 모두 차지하는 빈 칸 */
   }
 
 .share-sec {
-  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.share-sec h3{
+    font-weight: 700;
 }
 
 .bg-yellow {
-  background-color: var(--bg);
-  border-radius: 20px;
-  margin-top: 40px;
+  background-color: var(--bg) !important;
+  border-radius: 20px !important;
+  margin-top: 40px !important;
 }
