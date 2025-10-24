@@ -19,7 +19,7 @@ export default function App() {
         <Route path="/goal1" element={<Goal1 />} />
         <Route path="/map" element={<Map />} />
         <Route path="/target" element={<Target />} />
-        <Route path="/Homepage" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/hikinglog" element={<Hiking_log />} />
       </Routes>

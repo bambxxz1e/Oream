@@ -1,11 +1,12 @@
 import { useMemo, useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Goal1.css";
 import FairyCard from "./component/FairyCard";
 import EditableTitle from "./component/EditableTitle";
 import ProgressBar from "./component/ProgressBar";
-import NavigationButtons from "./component/NavigationButtons";
+// import NavigationButtons from "./component/NavigationButtons";
 
-// 이미지 경로는 프로젝트 구조에 맞게 수정하세요
+// 이미지 경로
 import Sora from "./img/Sora.png";
 import SoraAvatar from "./img/SoraAvatar.png";
 import Romy from "./img/Romy.png";
@@ -13,25 +14,13 @@ import RomiAvatar from "./img/RomiAvatar.png";
 import Chodam from "./img/Chodam.png";
 import ChodamAvatar from "./img/ChodamAvatar.png";
 
-/**
- * Goal1
- * - props.onNext(selectedFairy) : 다음 버튼 클릭 시 선택된 요정 객체를 넘겨줌 (옵션)
- * - props.onPrev()              : 이전 클릭 (옵션)
- * - 라우터를 쓰고 싶으면 onNext 대신 useNavigate로 이동하도록 바꿔도 됩니다.
- */
-export default function Goal1({ onNext, onPrev }) {
+export default function Goal1() {
+  const navigate = useNavigate();
+  
   // ===== 단계 진행 상태 =====
   const [currentStep, setCurrentStep] = useState(1);
   const [title, setTitle] = useState("등반을 함께할 캐릭터를 선택해주세요!");
   const totalSteps = 3;
-
-  const handleStepPrev = useCallback(() => {
-    setCurrentStep((s) => (s > 1 ? s - 1 : s));
-  }, []);
-
-  const handleStepNext = useCallback(() => {
-    setCurrentStep((s) => (s < totalSteps ? s + 1 : s));
-  }, []);
 
   // ===== 카드 데이터 =====
   const fairies = useMemo(
@@ -85,7 +74,6 @@ export default function Goal1({ onNext, onPrev }) {
   // 가운데 로미부터 시작 (index 1)
   const [idx, setIdx] = useState(1);
   const total = fairies.length;
-  const current = fairies[idx];
 
   // 카드 좌우 이동
   const prevCard = useCallback(() => {
@@ -117,15 +105,30 @@ export default function Goal1({ onNext, onPrev }) {
     [idx, total]
   );
 
-  // 외부로 선택된 캐릭터 전달
-  const handleConfirmNext = useCallback(() => {
-    if (onNext) onNext(current);
-    else console.log("NEXT with:", current);
-  }, [onNext, current]);
+  // 단계 이전 버튼
+  const handleStepPrev = useCallback(() => {
+    const prevStep = currentStep - 1;
+    if (prevStep < 1) {
+      navigate(-1); // 첫 단계면 이전 페이지로
+    } else {
+      setCurrentStep(prevStep);
 
-  const handleConfirmPrev = useCallback(() => {
-    if (onPrev) onPrev();
-  }, [onPrev]);
+      if (prevStep === 1) {
+        navigate("/goal");
+      }
+    }
+  }, [currentStep, navigate]);
+
+
+  // 단계 다음 버튼
+ const handleStepNext = useCallback(() => {
+    const nextStep = currentStep + 1;
+    setCurrentStep(nextStep);
+
+    if (nextStep === 2) {
+      navigate("/map");
+    }
+  }, [currentStep, navigate]);
 
   return (
     <div className="g1-wrap">
@@ -168,13 +171,25 @@ export default function Goal1({ onNext, onPrev }) {
           </button>
         </div>
       </main>
-      <NavigationButtons
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          onPrevious={handleStepPrev}
-          onNext={handleStepNext}
-          className = "navbutton"
-        />
+
+      {/* 하단 네비게이션 버튼 */}
+       <div className="nav-buttons-wrap">
+        <button
+          className="nav-btn prev"
+          onClick={handleStepPrev}  // ✅ 수정
+          disabled={currentStep === 1}
+        >
+          이전
+        </button>
+
+        <button
+          className="nav-btn next"
+          onClick={handleStepNext}  // ✅ 수정
+          disabled={currentStep === totalSteps}
+        >
+          다음
+        </button>
+      </div>
     </div>
   );
 }

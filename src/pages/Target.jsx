@@ -3,8 +3,11 @@ import HashtagSelector from "./component/HashtagSelector";
 import ProgressBar from "./component/ProgressBar";
 import EditableTitle from "./component/EditableTitle";
 import Todolist from "./component/Todolist";
+import { useNavigate } from "react-router-dom";
 
-function Target() {
+export default function Target() {
+  const navigate = useNavigate();
+
   const [currentStep, setCurrentStep] = useState(3);
   const [title, setTitle] = useState("등반 목표를 설정해보세요!");
   const [selectedTags, setSelectedTags] = useState([]);
@@ -15,12 +18,21 @@ function Target() {
     if (locationName) {
       setTitle(`'${locationName}' 등반 목표를 설정해보세요!`);
     }
+
+    // 저장된 투두 불러오기
+    const savedTodos = JSON.parse(localStorage.getItem("todoItems") || "[]");
+    setTodoItems(savedTodos);
+
+    // 저장된 해시태그 불러오기
+    const savedTags = JSON.parse(localStorage.getItem("selectedHashtags") || "[]");
+    setSelectedTags(savedTags);
   }, []);
 
   const handleComplete = () => {
     localStorage.setItem("selectedHashtags", JSON.stringify(selectedTags));
     localStorage.setItem("todoItems", JSON.stringify(todoItems));
     alert("등반 목표가 저장되었습니다! 🎉");
+    navigate("/profile");
   };
 
   return (
@@ -28,7 +40,7 @@ function Target() {
       style={{
         minHeight: "100vh",
         width: "100%",
-        backgroundColor: "#FFF265", // 화면 전체 노란색
+        backgroundColor: "#FFF265",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -39,33 +51,23 @@ function Target() {
           width: "390px",
           height: "844px",
           backgroundColor: "#FFF265",
-          borderRadius: "0", // 카드 둥근 모서리 제거
           padding: "24px 20px",
           display: "flex",
           flexDirection: "column",
           gap: "16px",
         }}
       >
-        {/* 상단 진행 표시 */}
         <ProgressBar currentStep={currentStep} totalSteps={3} />
-
-        {/* 제목 */}
         <EditableTitle
           currentStep={currentStep}
           title={title}
           onTitleChange={setTitle}
         />
-
-        {/* 해시태그 선택 */}
         <HashtagSelector
           selectedTags={selectedTags}
           onTagsChange={setSelectedTags}
         />
-
-        {/* TODO 리스트 */}
         <Todolist items={todoItems} onItemsChange={setTodoItems} />
-
-        {/* 완료 버튼 */}
         <button
           onClick={handleComplete}
           style={{
@@ -84,11 +86,9 @@ function Target() {
           onMouseEnter={(e) => (e.target.style.backgroundColor = "#3aaef8")}
           onMouseLeave={(e) => (e.target.style.backgroundColor = "#4db8ff")}
         >
-            완료
+          완료
         </button>
       </div>
     </div>
   );
 }
-
-export default Target;

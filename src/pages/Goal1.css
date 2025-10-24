@@ -37,7 +37,7 @@ body {
 .g1-wrap {
   min-height: 100vh;
   padding: 32px 16px 64px;
-  background:#FFF265;
+  background: #fff265;
 }
 
 /* ===== 메인 섹션 ===== */
@@ -249,3 +249,45 @@ body {
   }
 }
 
+.nav-buttons-wrap {
+  /* margin-top: 50px; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff265;
+  padding: 10px;
+  border-radius: 14px;
+  width: 100%;
+  gap: 10px;
+}
+
+/* 버튼 공통 */
+.nav-btn {
+  flex: 1;
+  height: 56px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* 이전 */
+.nav-btn.prev {
+  background-color: white;
+  color: #bfbfbf;
+  box-shadow: inset 0 0 0 2px #9cd0ff;
+}
+
+/* 다음 */
+.nav-btn.next {
+  background-color: #4db8ff;
+  color: white;
+  box-shadow: inset 0 0 0 2px #9cd0ff;
+}
+
+.nav-btn.next:hover {
+  background-color: #3aa9f9;
+  transform: scale(0.98);
+}

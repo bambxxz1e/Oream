@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCallback, useState } from "react";
+
 import ProgressBar from "./component/ProgressBar";
 import EditableTitle from "./component/EditableTitle";
 import MapboxToggle from "./component/MapboxToggle";
 import NavigationButtons from "./component/NavigationButtons";
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
   const [currentStep, setCurrentStep] = useState(2);
   const [title, setTitle] = useState("등반 장소 설정");
   const totalSteps = 3;
@@ -12,6 +16,31 @@ export default function HomePage() {
   const handlePrevious = () => currentStep > 1 && setCurrentStep(currentStep - 1);
   const handleNext = () => currentStep < totalSteps && setCurrentStep(currentStep + 1);
   const handleTitleChange = (newTitle) => setTitle(newTitle);
+
+  // 단계 이전 버튼
+    const handleStepPrev = useCallback(() => {
+      const prevStep = currentStep - 1;
+      if (prevStep < 1) {
+        navigate(-1); // 첫 단계면 이전 페이지로
+      } else {
+        setCurrentStep(prevStep);
+  
+        if (prevStep === 2) {
+          navigate("/map");
+        }
+      }
+    }, [currentStep, navigate]);
+  
+  
+    // 단계 다음 버튼
+   const handleStepNext = useCallback(() => {
+      const nextStep = currentStep + 1;
+      setCurrentStep(nextStep);
+  
+      if (nextStep === 3) {
+        navigate("/target");
+      }
+    }, [currentStep, navigate]);
 
   return (
     <div
@@ -41,8 +70,8 @@ export default function HomePage() {
           <NavigationButtons
             currentStep={currentStep}
             totalSteps={totalSteps}
-            onPrevious={handlePrevious}
-            onNext={handleNext}
+            onPrevious={handleStepPrev}
+            onNext={handleStepNext}
           />
         </div>
       </div>
