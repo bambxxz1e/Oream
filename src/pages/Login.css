@@ -11,7 +11,6 @@
 * {
   box-sizing: border-box;
   font-family: "Pretendard";
-
 }
 html,
 body,
@@ -61,6 +60,16 @@ body {
   font-size: 14px;
   color: #333;
   margin-top: 8px;
+}
+
+.new {
+  margin-top: 20px;
+}
+
+.label-new {
+  font-weight: 400;
+  font-size: 14px;
+  color: #919191;
 }
 
 /* 인풋 */

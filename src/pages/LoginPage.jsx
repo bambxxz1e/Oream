@@ -75,6 +75,11 @@ export default function Login() {
             </button>
           </div>
 
+          <div className="new">
+            <label className="label-new">새로 가입하신다면?</label>
+            {/* '회원가입'으로 넘어가는거 만들기 */}
+          </div>
+
           <button className="btn-login" type="submit" disabled={loading}>
             {loading ? "로그인 중..." : "로그인"}
           </button>
