@@ -22,7 +22,7 @@ import ChodamAvatar from "./img/ChodamAvatar.png";
 export default function Goal1({ onNext, onPrev }) {
   // ===== 단계 진행 상태 =====
   const [currentStep, setCurrentStep] = useState(1);
-  const [title, setTitle] = useState("단계별 진행");
+  const [title, setTitle] = useState("등반을 함께할 캐릭터를 선택해주세요!");
   const totalSteps = 3;
 
   const handleStepPrev = useCallback(() => {
@@ -130,15 +130,9 @@ export default function Goal1({ onNext, onPrev }) {
   return (
     <div className="g1-wrap">
       {/* 상단 단계/제목/네비 */}
-      <div className="w-full max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-lg">
-        <EditableTitle currentStep={currentStep} title={title} onTitleChange={setTitle} />
+      <div>
         <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-        <NavigationButtons
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          onPrevious={handleStepPrev}
-          onNext={handleStepNext}
-        />
+        <EditableTitle currentStep={currentStep} title={title} onTitleChange={setTitle} />
       </div>
 
       {/* 메인 캐릭터 카드 영역 */}
@@ -173,17 +167,14 @@ export default function Goal1({ onNext, onPrev }) {
             ›
           </button>
         </div>
-
-        {/* 선택 확정/이전(옵션) */}
-        <div className="g1-actions">
-          <button type="button" className="g1-btn g1-btn-secondary" onClick={handleConfirmPrev}>
-            이전
-          </button>
-          <button type="button" className="g1-btn g1-btn-primary" onClick={handleConfirmNext}>
-            이 요정으로 진행
-          </button>
-        </div>
       </main>
+      <NavigationButtons
+          currentStep={currentStep}
+          totalSteps={totalSteps}
+          onPrevious={handleStepPrev}
+          onNext={handleStepNext}
+          className = "navbutton"
+        />
     </div>
   );
 }
